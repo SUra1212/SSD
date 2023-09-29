@@ -3,14 +3,16 @@ const PatientCheckin = require("../../models/PatientCheckin");
 
 const router = express.Router();
 
-//save appointment
+// Save Patient Checking Details
 router.post("/pcheck/save", (req, res) => {
-  let newPost = new PatientCheckin(req.body);
+  const newPostData = req.body; // Assuming you have already validated and sanitized the input
+
+  const newPost = new PatientCheckin(newPostData);
 
   newPost.save((err) => {
     if (err) {
       return res.status(400).json({
-        error: err,
+        error: err.message, // Send the error message for better debugging
       });
     }
 
@@ -20,12 +22,12 @@ router.post("/pcheck/save", (req, res) => {
   });
 });
 
-//get appointments
+// Get Patient Checking Details
 router.get("/pcheck", (req, res) => {
   PatientCheckin.find().exec((err, posts) => {
     if (err) {
       return res.status(400).json({
-        error: err,
+        error: err.message, // Send the error message for better debugging
       });
     }
     return res.status(200).json({
@@ -35,13 +37,13 @@ router.get("/pcheck", (req, res) => {
   });
 });
 
-//get a specific appointment
+// Get a Patient Checking Detail
 router.get("/pcheck/:id", (req, res) => {
-  let postId = req.params.id;
+  const postId = req.params.id;
 
   PatientCheckin.findById(postId, (err, post) => {
     if (err) {
-      return res.status(400).json({ success: false, err });
+      return res.status(400).json({ success: false, error: err.message });
     }
 
     return res.status(200).json({
@@ -51,34 +53,37 @@ router.get("/pcheck/:id", (req, res) => {
   });
 });
 
-//update appointment
+// Update Patient Checking Details
 router.put("/pcheck/update/:id", (req, res) => {
   PatientCheckin.findByIdAndUpdate(
     req.params.id,
     {
       $set: req.body,
     },
+    { new: true }, // Return the updated document
     (err, post) => {
       if (err) {
-        return res.status(400).json({ error: err });
+        return res.status(400).json({ error: err.message });
       }
       return res.status(200).json({
-        success: "Updated Succesfully",
+        success: "Updated Successfully",
+        post,
       });
     }
   );
 });
 
-//delete notes
+// Delete Patient Checking Details
 router.delete("/pcheck/delete/:id", (req, res) => {
-  PatientCheckin.findByIdAndRemove(req.params.id).exec((err, deletedpost) => {
-    if (err)
+  PatientCheckin.findByIdAndRemove(req.params.id, (err, deletedpost) => {
+    if (err) {
       return res.status(400).json({
-        message: "Delete Unsuccesfull",
-        err,
+        message: "Delete Unsuccessful",
+        error: err.message,
       });
+    }
     return res.json({
-      message: "Delete Successfull",
+      message: "Delete Successful",
       deletedpost,
     });
   });

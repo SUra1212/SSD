@@ -29,6 +29,7 @@
     "dotenv": "^16.0.1",
     "express": "^4.17.1",
     "express-fileupload": "^1.4.0",
+    "express-validator": "^7.0.1",
     "is-empty": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
     "jspdf": "^2.5.1",
