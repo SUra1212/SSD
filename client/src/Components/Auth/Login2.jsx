@@ -14,40 +14,42 @@ class Login2 extends Component {
       email: "",
       password: "",
       errors: {},
+      genericError: "", // New state for generic error message
     };
   }
+
   componentDidMount() {
-    // If logged in and user navigates to Login page, should redirect them to dashboard
     if (this.props.auth.isAuthenticated) {
       this.props.history.push("/dashboard2");
     }
   }
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.auth.isAuthenticated) {
+
+  componentDidUpdate(prevProps) {
+    if (this.props.auth.isAuthenticated && !prevProps.auth.isAuthenticated) {
       alert("Login Successfully");
-      this.props.history.push("/dashboard2"); // push user to dashboard when they login
+      this.props.history.push("/dashboard2");
     }
-    if (nextProps.errors) {
-      this.setState({
-        errors: nextProps.errors,
-      });
+    if (this.props.errors !== prevProps.errors) {
+      const genericError = "Invalid email or password";
+      this.setState({ errors: this.props.errors, genericError });
     }
   }
 
   onChangeLogin = (e) => {
     this.setState({ [e.target.id]: e.target.value });
   };
+
   loginSubmit = (e) => {
     e.preventDefault();
     const userData = {
       email: this.state.email,
       password: this.state.password,
     };
-    this.props.loginUser2(userData); // since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
+    this.props.loginUser2(userData);
   };
 
   render() {
-    const { email, password, errors } = this.state;
+    const { email, password, errors, genericError } = this.state;
     return (
       <div>
         <section className="login c">
@@ -56,8 +58,7 @@ class Login2 extends Component {
               <div className="col-lg-6">
                 <div className="login-left">
                   <h4 className="text-capitalize">
-                    Login with your credentials to enjoy the Application
-                    services
+                    Login with your credentials to enjoy the Application services
                   </h4>
                 </div>
               </div>
@@ -65,21 +66,19 @@ class Login2 extends Component {
                 <div className="login-right">
                   <h1>Login</h1>
                   <form noValidate onSubmit={this.loginSubmit}>
-                    <div class="form-row">
-                      <div class="form-group col-md-12">
-                        <label htmlFor="Email">Email</label> <br />
+                    <div className="form-row">
+                      <div className="form-group col-md-12">
+                        <label htmlFor="email">Email</label> <br />
                         <input
                           type="email"
-                          className="input-control"
+                          className={classnames("input-control", {
+                            invalid: errors.email || errors.emailNotFound,
+                          })}
                           placeholder="Enter your email"
                           id="email"
                           value={email}
                           onChange={this.onChangeLogin}
-                          error={errors.email}
-                          classname={classnames("", {
-                            invalid: errors.email || errors.emailNotFound,
-                          })}
-                        />{" "}
+                        />
                         <br />
                         <span className="text-danger">
                           {errors.email}
@@ -87,31 +86,30 @@ class Login2 extends Component {
                         </span>
                       </div>
                     </div>
-                    <div class="form-row">
-                      <div class="form-group col-md-12">
-                        <label htmlFor="Password">Password</label> <br />
+                    <div className="form-row">
+                      <div className="form-group col-md-12">
+                        <label htmlFor="password">Password</label> <br />
                         <input
                           type="password"
-                          className="input-control"
+                          className={classnames("input-control", {
+                            invalid:
+                              errors.password || errors.passwordIncorrect,
+                          })}
                           placeholder="Enter your password"
                           id="password"
                           value={password}
                           onChange={this.onChangeLogin}
-                          error={errors.password}
-                          classname={classnames("", {
-                            invalid:
-                              errors.password || errors.passwordIncorrect,
-                          })}
-                        />{" "}
+                        />
                         <br />
                         <span className="text-danger">
                           {errors.password}
                           {errors.passwordIncorrect}
+                          {genericError}
                         </span>
                       </div>
                     </div>
-                    <div class="form-row">
-                      <div class="form-group col-md-12">
+                    <div className="form-row">
+                      <div className="form-group col-md-12">
                         <button
                           type="submit"
                           className="btn btn-md btn-register"
@@ -120,10 +118,10 @@ class Login2 extends Component {
                         </button>
                       </div>
                     </div>
-                    <div class="form-row">
-                      <div class="form-group col-md-12">
+                    <div className="form-row">
+                      <div className="form-group col-md-12">
                         <p>
-                          Don't have an account ?
+                          Don't have an account?{" "}
                           <Link to="/register1" className="text-success">
                             Create one
                           </Link>
@@ -142,12 +140,14 @@ class Login2 extends Component {
 }
 
 Login2.propTypes = {
-  loginUser: PropTypes.func.isRequired,
+  loginUser2: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
 };
+
 const mapStateToProps = (state) => ({
   auth: state.auth,
   errors: state.errors,
 });
+
 export default connect(mapStateToProps, { loginUser2 })(Login2);
