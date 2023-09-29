@@ -2,6 +2,7 @@ import Axios from "axios";
 import React, { Component } from "react";
 import "./Allcss.css";
 import swal from "@sweetalert/with-react";
+import DOMPurify from "dompurify";
 
 export default class CreateAppBooking extends Component {
   constructor(props) {
@@ -89,6 +90,16 @@ export default class CreateAppBooking extends Component {
     }
   };
   render() {
+     const { title, pname, mobile, date, email, nicpass, area } = this.state;
+
+     // Sanitize the data before rendering
+     const sanitizedTitle = DOMPurify.sanitize(title);
+     const sanitizedPname = DOMPurify.sanitize(pname);
+     const sanitizedMobile = DOMPurify.sanitize(mobile);
+     const sanitizedDate = DOMPurify.sanitize(date);
+     const sanitizedEmail = DOMPurify.sanitize(email);
+     const sanitizedNicpass = DOMPurify.sanitize(nicpass);
+     const sanitizedArea = DOMPurify.sanitize(area);
     return (
       <div>
         <nav class="navbar navbar-expand-lg nav">
@@ -129,10 +140,7 @@ export default class CreateAppBooking extends Component {
                 </center>
                 <br />
                 <br />
-                <div
-                  className="form-group"
-                  style={{ marginBottom: "15px" }}
-                >
+                <div className="form-group" style={{ marginBottom: "15px" }}>
                   <lable style={{ marginBottom: "5px" }}>Title</lable>
                   <select
                     name="title"
@@ -150,6 +158,12 @@ export default class CreateAppBooking extends Component {
                     <option>Baby</option>
                   </select>
                 </div>
+                <h3 className="title">
+                  <span
+                    className="badge bg-light text-dark"
+                    dangerouslySetInnerHTML={{ __html: sanitizedTitle }}
+                  ></span>
+                </h3>
                 <div className="form-group" style={{ marginBottom: "15px" }}>
                   <lable style={{ marginBottom: "5px" }}>Patient Name</lable>
                   <input
@@ -161,6 +175,12 @@ export default class CreateAppBooking extends Component {
                     onChange={this.handleInputChange}
                   />
                 </div>
+                <h3 className="title">
+                  <span
+                    className="badge bg-light text-dark"
+                    dangerouslySetInnerHTML={{ __html: sanitizedPname }}
+                  ></span>
+                </h3>
                 <div className="form-group" style={{ marginBottom: "15px" }}>
                   <lable style={{ marginBottom: "5px" }}>Mobile</lable>
                   <input
@@ -172,6 +192,12 @@ export default class CreateAppBooking extends Component {
                     onChange={this.handleInputChange}
                   />
                 </div>
+                <h3 className="title">
+                  <span
+                    className="badge bg-light text-dark"
+                    dangerouslySetInnerHTML={{ __html: sanitizedMobile }}
+                  ></span>
+                </h3>
                 <div className="form-group" style={{ marginBottom: "15px" }}>
                   <lable style={{ marginBottom: "5px" }}>Date</lable>
                   <input
@@ -183,6 +209,12 @@ export default class CreateAppBooking extends Component {
                     onChange={this.handleInputChange}
                   />
                 </div>
+                <h3 className="title">
+                  <span
+                    className="badge bg-light text-dark"
+                    dangerouslySetInnerHTML={{ __html: sanitizedDate }}
+                  ></span>
+                </h3>
                 <div className="form-group" style={{ marginBottom: "15px" }}>
                   <lable style={{ marginBottom: "5px" }}>Email</lable>
                   <input
@@ -194,6 +226,12 @@ export default class CreateAppBooking extends Component {
                     onChange={this.handleInputChange}
                   />
                 </div>
+                <h3 className="title">
+                  <span
+                    className="badge bg-light text-dark"
+                    dangerouslySetInnerHTML={{ __html: sanitizedEmail }}
+                  ></span>
+                </h3>
                 <div className="form-group" style={{ marginBottom: "15px" }}>
                   <lable style={{ marginBottom: "5px" }}>NIC/Passport</lable>
                   <input
@@ -205,6 +243,13 @@ export default class CreateAppBooking extends Component {
                     onChange={this.handleInputChange}
                   />
                 </div>
+                {/* Display sanitized area using dangerouslySetInnerHTML */}
+                <h3 className="title">
+                  <span
+                    className="badge bg-light text-dark"
+                    dangerouslySetInnerHTML={{ __html: sanitizedNicpass }}
+                  ></span>
+                </h3>
                 <div className="form-group" style={{ marginBottom: "15px" }}>
                   <lable style={{ marginBottom: "5px" }}>Area</lable>
                   <input
@@ -216,6 +261,13 @@ export default class CreateAppBooking extends Component {
                     onChange={this.handleInputChange}
                   />
                 </div>
+                {/* Display sanitized area using dangerouslySetInnerHTML */}
+                <h3 className="title">
+                  <span
+                    className="badge bg-light text-dark"
+                    dangerouslySetInnerHTML={{ __html: sanitizedArea }}
+                  ></span>
+                </h3>
               </form>
               <br></br>
               <center>
