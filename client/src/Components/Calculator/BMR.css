@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+*, *:before, *:after {
+    box-sizing: border-box;
+  }
+
+div#bmrcalc {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+}
+.form1 {
+    width: 600px;
+    background: white;
+    padding: 20px;
+    border: 1px solid #ffc5c5;
+    box-shadow: 0 1px 9px #cdb3b3;
+    border-radius: 5px;
+    max-width: 100%;
+}
+
+.inputwrap1 {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.inputwrap1 label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+.maintop{
+    display: block;
+    font-size: 16px;
+    margin-bottom: 4px;
+    font-weight: bold;
+}
+
+.inputBMR[type="text"],.inputBMR[type="number"] {
+    padding: 8px 7px;
+    width: 110px;
+    margin-right: 10px;
+    
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+}
+.inputBMR[type="text"] {
+    width: 100%;
+}
+
+.inputBMR[type="submit"] {
+    width: 100%;
+    display: block;
+    background: black;
+    color: white;
+    text-transform: uppercase;
+    padding: 10px 0px;
+    border: none;
+    
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+}
+.button1bmr {
+    display: block;
+    width: 100%;
+    padding: 10px 1px;
+    background: black;
+    color: white;
+    border: none;
+    font-family: 'Open Sans', sans-serif;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-size: 16px;
+}
+select {
+    padding: 10px 10px;
+    width: 100%;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+}
+.error {
+    background: #bf2121;
+    color: white;
+    text-align: center;
+    padding: 4px 16px;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+.result {
+    background: red;
+    color: white;
+    text-align: center;
+    padding: 10px 0px;
+    margin-top: 9px;
+    font-size: 18px;
+}
+.workout1 {
+    margin-top: 19px;
+}
+
+@media only screen and (max-width:500px) {
+
+    div#bmrcalc {
+        align-items: end;
+    }
+}

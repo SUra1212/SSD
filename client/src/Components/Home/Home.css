@@ -1,0 +1,315 @@
+.Homepi {
+  width: 50%;
+
+}
+
+.btnh3 {
+  margin-left: 10%;
+}
+
+.card {
+
+  border: none;
+  background: #eee;
+
+
+}
+
+.search {
+  width: 100%;
+  margin-bottom: auto;
+  margin-top: 20px;
+  height: 50px;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.search-input {
+  color: white;
+  border: 0;
+  outline: 0;
+  background: none;
+  width: 0;
+  margin-top: 5px;
+  caret-color: transparent;
+  line-height: 20px;
+  transition: width 0.4s linear
+}
+
+.search .search-input {
+  padding: 0 10px;
+  width: 100%;
+  caret-color: #536bf6;
+  font-size: 19px;
+  font-weight: 300;
+  color: black;
+  transition: width 0.4s linear;
+}
+
+
+.search-icon {
+  height: 34px;
+  width: 34px;
+  float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: #536bf6;
+  font-size: 10px;
+  bottom: 30px;
+  position: relative;
+  border-radius: 5px;
+}
+
+.search-icon:hover {
+
+  color: #fff !important;
+}
+
+a:link {
+  text-decoration: none
+}
+
+.card-inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, .125);
+  border-radius: .25rem;
+  border: none;
+  cursor: pointer;
+  transition: all 2s;
+}
+
+
+.card-inner:hover {
+
+  transform: scale(1.1);
+
+}
+
+.mg-text span {
+
+  font-size: 12px;
+
+}
+
+.mg-text {
+
+  line-height: 14px;
+}
+
+/* //.........................................// */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap");
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.hero-container {
+  margin: auto;
+  display: flex;
+}
+
+.main-container {
+  width: 270px;
+  height: 570px;
+  position: relative;
+  margin: 0 20px;
+}
+
+.poster-container {
+  width: 230px;
+  position: absolute;
+  top: 0;
+  left: 20px;
+  z-index: 9999;
+}
+
+.poster {
+  width: 100%;
+  box-shadow: 0 5px 20px 3px rgba(0, 0, 0, 0.6);
+}
+
+.ticket-container {
+  background: white;
+  width: 270px;
+  height: 430px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 5px;
+  position: absolute;
+  top: 22px;
+  box-shadow: 0 5px 20px 3px rgba(0, 0, 0, 0.6);
+  opacity: 0;
+}
+
+.main-container:hover .ticket-container {
+  opacity: 1;
+  animation: bounceIn 0.6s linear;
+}
+
+@keyframes bounceIn {
+
+  0%,
+  20%,
+  40%,
+  60%,
+  80%,
+  to {
+      -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+      animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+
+  0% {
+      opacity: 0;
+      -webkit-transform: scale3d(0.3, 0.3, 0.3);
+      transform: scale3d(0.3, 0.3, 0.3);
+  }
+
+  20% {
+      -webkit-transform: scale3d(1.03, 1.03, 1.03);
+      transform: scale3d(1.03, 1.03, 1.03);
+  }
+
+  40% {
+      -webkit-transform: scale3d(0.9, 0.9, 0.9);
+      transform: scale3d(0.9, 0.9, 0.9);
+  }
+
+  60% {
+      opacity: 1;
+      -webkit-transform: scale3d(1.01, 1.01, 1.01);
+      transform: scale3d(1.01, 1.01, 1.01);
+  }
+
+  80% {
+      -webkit-transform: scale3d(0.97, 0.97, 0.97);
+      transform: scale3d(0.97, 0.97, 0.97);
+  }
+
+  to {
+      opacity: 1;
+      -webkit-transform: scaleX(1);
+      transform: scaleX(1);
+  }
+}
+
+.ticket__content {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+}
+
+.ticket__movie-title {
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  color: black;
+}
+
+.ticket__movie-slogan {
+  color: blue;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.ticket__buy-btn {
+  cursor: pointer;
+  width: 100%;
+  background: yellow;
+  color: black;
+  padding: 15px 0;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: 0;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.hp1 {
+  margin-top: 3%;
+  margin-left: 3%;
+}
+.hp2 {
+  margin-top: 3%;
+  
+}
+.hp3 {
+  margin-top: 3%;
+
+}
+.hp4 {
+  margin-top: 3%;
+ 
+}
+
+.group { 
+  display: table;
+  width: 100%;
+  font-size: 3em;
+}
+.item {
+  display: table-cell;
+}
+.text { 
+  white-space: nowrap;
+  width: 1%;
+  padding: 0 10px;
+  color: blue;
+}
+.line {
+  border-bottom: 1px solid #000;
+  position: relative;
+  top: -.5em;
+}
+.textline{
+  margin-top: -6%;
+}
+
+.group1 { 
+  display: table;
+  width: 100%;
+  font-size: 3em;
+}
+.item1 {
+  display: table-cell;
+}
+.text1 { 
+  white-space: nowrap;
+  width: 1%;
+  padding: 0 10px;
+  color: blue;
+}
+.line1 {
+  border-bottom: 1px solid #000;
+  position: relative;
+  top: -.5em;
+}
+.textline1{
+  margin-top: 3%;
+}
+
+
+
+
+.hp12 {
+  margin-top: 3%;
+  margin-left: 15%;
+}
+.hp22 {
+  margin-top: 3%;
+  margin-left: 12%;
+ 
+}
+

@@ -1,0 +1,51 @@
+.suwaarana {
+  width: 5%;
+}
+
+.a {
+  margin-left: 43%;
+}
+
+nav {
+  background-color: #1b2841;
+  font-family: var(--Oswald);
+  letter-spacing: 1px;
+}
+
+.navtext {
+  color: #fff;
+  font-size: 170%;
+  font-weight: bolder;
+  font-family: Copperplate, Papyrus, fantasy;
+}
+
+.navtext1 {
+  color: #fff;
+  font-size: 120%;
+}
+
+.navbar-brand {
+  font-weight: bolder;
+  letter-spacing: 2px;
+}
+
+.nav-item .btn {
+  margin: 0px 25px;
+  padding: 5px 25px;
+  border-radius: 3px;
+}
+
+.btn-login {
+  background-color: #fff;
+  color: #000000 !important;
+}
+
+.btn-register {
+  background-color: rgb(233, 159, 0);
+  color: #000000 !important;
+}
+
+.nav1 {
+  margin-left: 20%;
+  width: 50%;
+}
