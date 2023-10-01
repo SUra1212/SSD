@@ -19,7 +19,7 @@
     "framer-motion": "^6.3.3",
     "js-file-download": "^0.4.12",
     "jspdf": "^2.5.1",
-    "jspdf-autotable": "^3.5.25",
+    "jspdf-autotable": "^3.6.0",
     "jwt-decode": "^2.2.0",
     "MERN_Authentication": "file:..",
     "process": "^0.11.10",
