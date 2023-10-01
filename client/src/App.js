@@ -81,22 +81,18 @@ function App() {
           <Route path="/register2" component={Register2} />
           <Route path="/register3" component={Register3} />
           
-         
           <Route path="/loginDash" component={LoginDashboard}></Route>
-
 
           <Route path="/CAB" component={CreateAppBooking}></Route>
           <Route path="/UAB/:id" component={EditAppBooking}></Route>
           <Route path="/HAB" component={HomeAppBooking}></Route>
           <Route path="/BR" component={BookingReport}></Route>
 
-
           <Route path="/contactus" component={ContactUs}></Route>
           <Route path = "/aboutus" component={AboutUs}></Route>
           <Route path = "/services" component={Services}></Route>
           <Route path = "/bmical" component={BMIcal}></Route>
           <Route path = "/bmrcal" component={BMRcal}></Route>
-
 
           <Route path="/CPC" component={CreatePatientCheckin}></Route>
           <Route path="/UPC/:id" component={EditPatientCheckin}></Route>
@@ -109,6 +105,9 @@ function App() {
           <Route path="/homePharmacy" component={HomePharmacy}></Route>
           <Route path="/pReport" component={PharmacyReport}></Route>
 
+          <Route path="/dashboard1" component={Dashboard1}></Route>
+          <Route path="/dashboard2" component={Dashboard2}></Route>
+          <Route path="/dashboard3" component={Dashboard3}></Route>
 
           <Switch>
             <PrivateRoute exact path="/dashboard1" component={Dashboard1} />

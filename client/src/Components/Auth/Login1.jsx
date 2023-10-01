@@ -24,6 +24,12 @@ class Login1 extends Component {
     console.log(userObject);
     this.setState({ user: userObject });
     document.getElementById("signInDiv").hidden = true; //when a user already signed in
+    if (document.getElementById("signInDiv").hidden = true){
+      var confirmation = window.confirm("Login Successfully");
+      if (confirmation) {
+        window.location.href = "/dashboard1"; // Replace with the actual URL
+      }
+     } 
   };
 
   handleSignOut = (event) => {
@@ -38,7 +44,7 @@ class Login1 extends Component {
     if (window.google && window.google.accounts) {
       window.google.accounts.id.initialize({
         client_id:
-          "943710538249-c5b86unf68085l2u7kb7dedfgcogi2b4.apps.googleusercontent.com",
+          "191706304100-boma0djbs0ffmsnk3ihmu83a4efe75iu.apps.googleusercontent.com",
         callback: this.handleCallbackResponse,
       });
 
@@ -152,7 +158,9 @@ class Login1 extends Component {
                         </button>
                       </div>
                     </div>
+
                     <div id="signInDiv"></div>
+{/*                     
                     {Object.keys(user).length !== 0 && (
                       <button onClick={(e) => this.handleSignOut(e)}>
                         Sign Out
@@ -163,7 +171,7 @@ class Login1 extends Component {
                         <img src={user.picture} alt="User"></img>
                         <h3>{user.name}</h3>
                       </div>
-                    )}
+                    )} */}
                     <div class="form-row">
                       <div class="form-group col-md-12">
                         <p>

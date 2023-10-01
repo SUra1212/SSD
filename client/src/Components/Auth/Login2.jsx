@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser2 } from "../../redux/actions/authAction2";
 import classnames from "classnames";
+import jwt_decode from "jwt-decode";
+
 
 class Login2 extends Component {
   constructor(props) {
@@ -14,13 +16,50 @@ class Login2 extends Component {
       email: "",
       password: "",
       errors: {},
-      genericError: "", // New state for generic error message
+      genericError: "",
+      user: {}, 
     };
   }
+
+  handleCallbackResponse = (response) => {
+    console.log("JWT ID token" + response.credential);
+    var userObject = jwt_decode(response.credential);
+    console.log(userObject);
+    this.setState({ user: userObject });
+    document.getElementById("signInDiv").hidden = true; //when a user already signed in
+    if (document.getElementById("signInDiv").hidden = true){
+      var confirmation = window.confirm("Login Successfully");
+      if (confirmation) {
+        window.location.href = "/dashboard2"; // Replace with the actual URL
+      }
+     } 
+  };
+
+  handleSignOut = (event) => {
+    this.setState({ user: {} }); // no one signed in
+    document.getElementById("signInDiv").hidden = false;
+  };
 
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
       this.props.history.push("/dashboard2");
+    }
+    if (window.google && window.google.accounts) {
+      window.google.accounts.id.initialize({
+        client_id:
+          "191706304100-boma0djbs0ffmsnk3ihmu83a4efe75iu.apps.googleusercontent.com",
+        callback: this.handleCallbackResponse,
+      });
+
+      window.google.accounts.id.renderButton(
+        document.getElementById("signInDiv"),
+        {
+          theme: "outline",
+          size: "large",
+        }
+      );
+
+      window.google.accounts.id.prompt();
     }
   }
 
@@ -49,7 +88,7 @@ class Login2 extends Component {
   };
 
   render() {
-    const { email, password, errors, genericError } = this.state;
+    const { email, password, errors, genericError, user } = this.state;
     return (
       <div>
         <section className="login c">
@@ -118,6 +157,9 @@ class Login2 extends Component {
                         </button>
                       </div>
                     </div>
+
+                    <div id="signInDiv"></div>
+
                     <div className="form-row">
                       <div className="form-group col-md-12">
                         <p>
