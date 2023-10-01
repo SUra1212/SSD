@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser3 } from "../../redux/actions/authAction3";
 import classnames from "classnames";
+import jwt_decode from "jwt-decode";
+
 
 class Login3 extends Component {
   constructor(props) {
@@ -14,14 +16,50 @@ class Login3 extends Component {
       email: "",
       password: "",
       errors: {},
+      user: {},
     };
   }
+  handleCallbackResponse = (response) => {
+    console.log("JWT ID token" + response.credential);
+    var userObject = jwt_decode(response.credential);
+    console.log(userObject);
+    this.setState({ user: userObject });
+    document.getElementById("signInDiv").hidden = true; //when a user already signed in
+    if (document.getElementById("signInDiv").hidden = true){
+      var confirmation = window.confirm("Login Successfully");
+      if (confirmation) {
+        window.location.href = "/dashboard3"; // Replace with the actual URL
+      }
+     } 
+  };
+
+  handleSignOut = (event) => {
+    this.setState({ user: {} }); // no one signed in
+    document.getElementById("signInDiv").hidden = false;
+  };
+  
   componentDidMount() {
     // If logged in and user navigates to Login page, should redirect them to dashboard
     if (this.props.auth.isAuthenticated) {
       this.props.history.push("/dashboard3");
     }
+    if (window.google && window.google.accounts) {
+      window.google.accounts.id.initialize({
+        client_id:
+          "191706304100-boma0djbs0ffmsnk3ihmu83a4efe75iu.apps.googleusercontent.com",
+        callback: this.handleCallbackResponse,
+      });
+      window.google.accounts.id.renderButton(
+        document.getElementById("signInDiv"),
+        {
+          theme: "outline",
+          size: "large",
+        }
+      );
+      window.google.accounts.id.prompt();
+    }
   }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
       alert("Login Successfully");
@@ -121,6 +159,9 @@ class Login3 extends Component {
                         </button>
                       </div>
                     </div>
+
+                    <div id="signInDiv"></div>
+
                     <div class="form-row">
                       <div class="form-group col-md-12">
                         <p>
