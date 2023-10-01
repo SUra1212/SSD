@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { loginUser1 } from "../../redux/actions/authAction1";
 import classnames from "classnames";
 import jwt_decode from "jwt-decode";
+import FacebookLogin from "react-facebook-login";
 
 class Login1 extends Component {
   constructor(props) {
@@ -16,20 +17,30 @@ class Login1 extends Component {
       password: "",
       errors: {},
       user: {},
+      isLoggedIn: false,
     };
   }
+
+  responseFacebook = response => {
+    alert("Login Successfully");
+    window.location.href = '/dashboard1';
+
+  };
+
+  componentClicked = () => console.log("clicked");
+
   handleCallbackResponse = (response) => {
     console.log("JWT ID token" + response.credential);
     var userObject = jwt_decode(response.credential);
     console.log(userObject);
     this.setState({ user: userObject });
     document.getElementById("signInDiv").hidden = true; //when a user already signed in
-    if (document.getElementById("signInDiv").hidden = true){
+    if (document.getElementById("signInDiv").hidden = true) {
       var confirmation = window.confirm("Login Successfully");
       if (confirmation) {
         window.location.href = "/dashboard1"; // Replace with the actual URL
       }
-     } 
+    }
   };
 
   handleSignOut = (event) => {
@@ -84,7 +95,22 @@ class Login1 extends Component {
   };
 
   render() {
+    let fbContent;
+
     const { email, password, errors, user } = this.state;
+    if (this.state.isLoggedIn) {
+    } else {
+      fbContent = (
+        <FacebookLogin
+          appId="157350117438724"
+          autoLoad={true}
+          fields="name,email,picture"
+          onClick={this.componentClicked}
+          callback={this.responseFacebook}
+          icon="fa-facebook"
+        />
+      );
+    }
     return (
       <div>
         <section className="login c">
@@ -160,7 +186,10 @@ class Login1 extends Component {
                     </div>
 
                     <div id="signInDiv"></div>
-{/*                     
+                    <br/>
+                    <div className="my-facebook-button-class">{fbContent}</div>
+
+                    {/*                     
                     {Object.keys(user).length !== 0 && (
                       <button onClick={(e) => this.handleSignOut(e)}>
                         Sign Out

@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { loginUser3 } from "../../redux/actions/authAction3";
 import classnames from "classnames";
 import jwt_decode from "jwt-decode";
+import FacebookLogin from "react-facebook-login";
 
 
 class Login3 extends Component {
@@ -17,8 +18,18 @@ class Login3 extends Component {
       password: "",
       errors: {},
       user: {},
+      isLoggedIn: false,
+
     };
   }
+  responseFacebook = response => {
+    alert("Login Successfully");
+    window.location.href = '/dashboard3';
+
+  };
+
+  componentClicked = () => console.log("clicked");
+
   handleCallbackResponse = (response) => {
     console.log("JWT ID token" + response.credential);
     var userObject = jwt_decode(response.credential);
@@ -85,7 +96,22 @@ class Login3 extends Component {
   };
 
   render() {
+    let fbContent;
+
     const { email, password, errors } = this.state;
+    if (this.state.isLoggedIn) {
+    } else {
+      fbContent = (
+        <FacebookLogin
+          appId="157350117438724"
+          autoLoad={true}
+          fields="name,email,picture"
+          onClick={this.componentClicked}
+          callback={this.responseFacebook}
+          icon="fa-facebook"
+        />
+      );
+    }
     return (
       <div>
         <section className="login c">
@@ -161,6 +187,8 @@ class Login3 extends Component {
                     </div>
 
                     <div id="signInDiv"></div>
+                    <br/>
+                    <div className="my-facebook-button-class">{fbContent}</div>
 
                     <div class="form-row">
                       <div class="form-group col-md-12">

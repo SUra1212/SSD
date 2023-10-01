@@ -6,6 +6,8 @@ import { connect } from "react-redux";
 import { loginUser2 } from "../../redux/actions/authAction2";
 import classnames from "classnames";
 import jwt_decode from "jwt-decode";
+import FacebookLogin from "react-facebook-login";
+
 
 
 class Login2 extends Component {
@@ -18,8 +20,16 @@ class Login2 extends Component {
       errors: {},
       genericError: "",
       user: {}, 
+      isLoggedIn: false,
     };
   }
+  responseFacebook = response => {
+    alert("Login Successfully");
+    window.location.href = '/dashboard2';
+
+  };
+
+  componentClicked = () => console.log("clicked");
 
   handleCallbackResponse = (response) => {
     console.log("JWT ID token" + response.credential);
@@ -88,7 +98,22 @@ class Login2 extends Component {
   };
 
   render() {
+    let fbContent;
+
     const { email, password, errors, genericError, user } = this.state;
+    if (this.state.isLoggedIn) {
+    } else {
+      fbContent = (
+        <FacebookLogin
+          appId="157350117438724"
+          autoLoad={true}
+          fields="name,email,picture"
+          onClick={this.componentClicked}
+          callback={this.responseFacebook}
+          icon="fa-facebook"
+        />
+      );
+    }
     return (
       <div>
         <section className="login c">
@@ -159,6 +184,9 @@ class Login2 extends Component {
                     </div>
 
                     <div id="signInDiv"></div>
+                    <br/>
+                    <div className="my-facebook-button-class">{fbContent}</div>
+
 
                     <div className="form-row">
                       <div className="form-group col-md-12">

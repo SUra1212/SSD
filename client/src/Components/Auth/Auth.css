@@ -48,3 +48,10 @@ form input {
 .c {
   margin-top: -5%;
 }
+
+.my-facebook-button-class {
+  width: 300px;
+  height: 100px; 
+  font-size: 1px;
+}
+
