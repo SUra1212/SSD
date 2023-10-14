@@ -1,102 +1,102 @@
 import axios from "axios"
-import React,{Component} from "react"
+import React, { Component } from "react"
 import "./Allcss.css"
 
 import Swal from "sweetalert2"
 
 export default class CreatePharmacy extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props)
-        this.state={
-            medicineName:"",
-            type:"Tablet",
-            quantity:'',
+        this.state = {
+            medicineName: "",
+            type: "Tablet",
+            quantity: '',
             expirationDate: "",
-            price:"",
+            price: "",
         }
 
     }
 
 
-    handleInputChange=(e)=>{
-        const {name,value}=e.target
+    handleInputChange = (e) => {
+        const { name, value } = e.target
         //console.log({...this.state});
         this.setState({
             ...this.state,
-            [name]:value
+            [name]: value
         })
 
     }
 
-    onChangeQuantity=(e)=>{
+    onChangeQuantity = (e) => {
         console.log(this.state.type)
-        if(this.state.type === 'Tablet' || this.state.type === 'Inhaler'){
+        if (this.state.type === 'Tablet' || this.state.type === 'Inhaler') {
             this.setState({
-                quantity:e.target.value.replace(/\D/g,'')+" Boxes"
+                quantity: e.target.value.replace(/\D/g, '') + " Boxes"
             })
-        }else if(
-            this.state.type === 'Syrup'||
-            this.state.type === 'Drops'||
+        } else if (
+            this.state.type === 'Syrup' ||
+            this.state.type === 'Drops' ||
             this.state.type === 'Topical'
-        ){
+        ) {
             this.setState({
-                quantity:e.target.value.replace(/\D/g,'')+" Bottles"
+                quantity: e.target.value.replace(/\D/g, '') + " Bottles"
             })
         }
-         
+
 
     }
 
-    onChangePrice=(e)=>{
+    onChangePrice = (e) => {
         console.log(e.target.value)
         this.setState({
-            price:"Rs."+e.target.value.replace(/\D/g,'')
+            price: "Rs." + e.target.value.replace(/\D/g, '')
         })
     }
 
 
-    onSubmit=(e)=>{
+    onSubmit = (e) => {
 
         e.preventDefault();
 
-        const {medicineName,type,quantity,expirationDate,price}=this.state
-        const data ={
-            medicineName:medicineName,
-            type:type,
-            quantity:quantity,
-            expirationDate:expirationDate,
-            price:price
+        const { medicineName, type, quantity, expirationDate, price } = this.state
+        const data = {
+            medicineName: medicineName,
+            type: type,
+            quantity: quantity,
+            expirationDate: expirationDate,
+            price: price
 
         }
 
         //console.log(data)
 
         //validation
-        if(
-            medicineName.length === 0||
-            type.length === 0||
+        if (
+            medicineName.length === 0 ||
+            type.length === 0 ||
             quantity.length === 0 ||
             expirationDate.length === 0 ||
-            price.length === 0 
-        ){
-           Swal.fire({
-            icon: 'error',
-            title: 'Warning',
-            text: 'Fill out all fields!',
-          })
-        }else{
-            axios.post("/pharmacy/save",data).then((res)=>{
-                let path="/addMedicine"
-                if(res.data.success){
+            price.length === 0
+        ) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Warning',
+                text: 'Fill out all fields!',
+            })
+        } else {
+            axios.post("/pharmacy/save", data).then((res) => {
+                let path = "/addMedicine"
+                if (res.data.success) {
                     alert("Details Saved Successfully")
                     this.props.history.push(path)
                     this.setState({
-                        medicineName:"",
-                        type:"",
-                        quantity:'',
+                        medicineName: "",
+                        type: "",
+                        quantity: '',
                         expirationDate: "",
-                        price:"",
+                        price: "",
                     })
                 }
             })
@@ -104,26 +104,26 @@ export default class CreatePharmacy extends Component {
 
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <div>
                 <nav class="navbar navbar-expand-lg nav" >
                     <div class="container-fluid">
                         <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ">
-                            <li class="nav-item">
-                            <div>
-                                <button className="btn btn-success">
-                                <a
-                                    href="/homePharmacy"
-                                    style={{ textDecoration: "none", color: "white" }}
-                                >
-                                    Details
-                                </a>{" "}
-                                </button>
-                            </div>
-                            </li>
-                        </ul>
+                            <ul class="navbar-nav ">
+                                <li class="nav-item">
+                                    <div>
+                                        <button className="btn btn-success">
+                                            <a
+                                                href="/homePharmacy"
+                                                style={{ textDecoration: "none", color: "white" }}
+                                            >
+                                                Details
+                                            </a>{" "}
+                                        </button>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </nav>
@@ -199,30 +199,30 @@ export default class CreatePharmacy extends Component {
                                         onChange={this.onChangePrice}
                                     />
                                 </div>
-                                </form>
-                                <center>
-                <a
-                  className="btn btn-warning btn-lg text-dark"
-                  type="submit"
-                  style={{ marginTop: "15px" }}
-                  onClick={this.onSubmit}
-                >
-                  <i className="far fa-check-square"></i>
-                  &nbsp; Save
-                </a>
-              </center>
+                            </form>
+                            <center>
+                                <a
+                                    className="btn btn-warning btn-lg text-dark"
+                                    type="submit"
+                                    style={{ marginTop: "15px" }}
+                                    onClick={this.onSubmit}
+                                >
+                                    <i className="far fa-check-square"></i>
+                                    &nbsp; Save
+                                </a>
+                            </center>
 
-                            
+
 
                         </div>
 
                     </div>
-                    <br/>
-                    <br/>
-                    <br/>
+                    <br />
+                    <br />
+                    <br />
 
                 </div>
-                        
+
             </div>
 
 
